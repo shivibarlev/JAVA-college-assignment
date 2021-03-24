@@ -19,5 +19,5 @@ public class BaseCommand implements Command
 
     }
     @Override
-    public void execute(){}
+    public boolean execute(){}
 }

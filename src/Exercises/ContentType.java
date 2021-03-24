@@ -8,7 +8,7 @@ public class ContentType extends BaseCommand
     }
 
     @Override
-    public void execute()
+    public boolean execute()
     {
 
     }

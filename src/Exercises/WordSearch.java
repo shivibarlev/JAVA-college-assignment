@@ -8,7 +8,7 @@ public class WordSearch extends BaseCommand
     }
 
     @Override
-    public void execute()
+    public boolean execute()
     {
 
     }
