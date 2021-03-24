@@ -10,6 +10,6 @@ public class CheckLang extends BaseCommand
     @Override
     public boolean execute()
     {
-
+        return true;
     }
 }

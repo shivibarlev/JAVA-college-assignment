@@ -10,6 +10,6 @@ public class ContentType extends BaseCommand
     @Override
     public boolean execute()
     {
-
+        return true;
     }
 }

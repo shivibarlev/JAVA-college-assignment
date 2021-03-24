@@ -10,6 +10,6 @@ public class WordSearch extends BaseCommand
     @Override
     public boolean execute()
     {
-
+        return true;
     }
 }

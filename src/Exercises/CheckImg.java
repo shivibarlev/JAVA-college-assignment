@@ -10,6 +10,6 @@ public class CheckImg extends  BaseCommand
     @Override
     public boolean execute()
     {
-
+        return true;
     }
 }
