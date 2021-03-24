@@ -1,8 +1,8 @@
 package Exercises;
 
-public class WordSearch extends BaseCommand
+public class CheckLang extends BaseCommand
 {
-    public WordSearch(String[] arguments)
+    public CheckLang(String[] arguments)
     {
         super(arguments);
     }

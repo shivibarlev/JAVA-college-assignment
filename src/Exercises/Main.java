@@ -15,5 +15,6 @@ public class Main
                     "<list of arguments>: a list of string separated by spaces, possibly empty\n");
 
         arguments = reader.nextLine().split(" ");
+
     }
 }
