@@ -1,5 +1,10 @@
 package Exercises;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class CheckLang extends BaseCommand
@@ -14,8 +19,10 @@ public class CheckLang extends BaseCommand
     }
 
     @Override
-    public boolean execute()
+    public boolean execute() throws IOException
     {
+        Document doc = Jsoup.connect(this.url).get();
+
         return true;
     }
 }

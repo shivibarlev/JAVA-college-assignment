@@ -1,5 +1,10 @@
 package Exercises;
 
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ContentType extends BaseCommand
@@ -14,8 +19,14 @@ public class ContentType extends BaseCommand
     }
 
     @Override
-    public boolean execute()
+    public boolean execute() throws IOException
     {
-        return true;
+        Connection.Response response = Jsoup
+                .connect(this.url)
+                .method(Connection.Method.POST)
+                .followRedirects(false)
+                .execute();
+
+        return response.hasHeader(this.args.get(2));
     }
 }

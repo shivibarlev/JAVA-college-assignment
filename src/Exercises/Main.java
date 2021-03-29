@@ -18,6 +18,8 @@ public class Main
                     "<list of arguments>: a list of string separated by spaces, possibly empty\n" + "Press q if you would like to stop the program.");
 
             arguments = reader.nextLine().split(" ");
+
+            System.out.println(new CommandFactory().getCommand(arguments).execute());
         }
 
 

@@ -1,5 +1,11 @@
 package Exercises;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
+
 public class CheckImg extends  BaseCommand
 {
     public CheckImg(String[] arguments)
@@ -8,8 +14,14 @@ public class CheckImg extends  BaseCommand
     }
 
     @Override
-    public boolean execute()
+    public boolean execute() throws IOException
     {
+        Document doc = Jsoup.connect(this.url).get();
+        Elements imageElements = doc.select("img");
+
+        if(imageElements.size() < 1)
+            return false;
         return true;
+
     }
 }

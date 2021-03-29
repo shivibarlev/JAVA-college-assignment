@@ -1,5 +1,7 @@
 package Exercises;
 
+import java.io.IOException;
+
 public interface Command {
-    boolean execute();
+    boolean execute() throws IOException;
 }

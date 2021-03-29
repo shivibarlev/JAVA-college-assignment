@@ -1,5 +1,6 @@
 package Exercises;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class BaseCommand implements Command
@@ -17,5 +18,5 @@ public class BaseCommand implements Command
 
     }
     @Override
-    public boolean execute(){return true;}
+    public boolean execute() throws IOException {return true;}
 }
