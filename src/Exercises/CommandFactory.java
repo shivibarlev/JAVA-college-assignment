@@ -6,18 +6,25 @@ public class CommandFactory
 {
     public Command getCommand(String [] arguments)
     {
-        switch (arguments[0])
-        {
-            case "t":
-                return new ContentType(arguments);
-            case  "w":
-                return new WordSearch(arguments);
-            case  "i":
-                return new CheckImg(arguments);
-            case  "l":
-                return new CheckLang(arguments);
 
+        try
+        {
+            switch (arguments[0])
+            {
+                case "t":
+                    return new ContentType(arguments);
+                case  "w":
+                    return new WordSearch(arguments);
+                case  "i":
+                    return new CheckImg(arguments);
+                case  "l":
+                    return new CheckLang(arguments);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
         return null;
     }
 }

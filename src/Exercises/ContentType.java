@@ -14,7 +14,8 @@ public class ContentType extends BaseCommand
     public ContentType(String[] arguments)
     {
         super(arguments);
-        for(int i = 2; i < arguments.length; i++)
+
+        for(int i = 2; i < arguments.length; ++i)
             args.add(arguments[i]);
     }
 
@@ -27,6 +28,6 @@ public class ContentType extends BaseCommand
                 .followRedirects(false)
                 .execute();
 
-        return response.hasHeader(this.args.get(2));
+        return response.hasHeader(this.args.get(0));
     }
 }
