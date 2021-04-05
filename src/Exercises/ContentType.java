@@ -20,14 +20,18 @@ public class ContentType extends BaseCommand
     }
 
     @Override
-    public boolean execute() throws IOException
+    public boolean action()
     {
-        Connection.Response response = Jsoup
-                .connect(this.url)
-                .method(Connection.Method.POST)
-                .followRedirects(false)
-                .execute();
-
-        return response.hasHeader(this.args.get(0));
+        try
+        {
+            Connection.Response response = Jsoup.connect(this.url).ignoreContentType(true).execute();
+            System.out.println(response.contentType());
+            return response.contentType().contains(this.args.get(0));
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

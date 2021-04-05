@@ -7,6 +7,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class CheckLang extends BaseCommand
@@ -21,60 +22,66 @@ public class CheckLang extends BaseCommand
         for(int i = 2; i < arguments.length; i++)
             args.add(arguments[i]);
 
-        this.freqMap.put('a', 0.082);
-        this.freqMap.put('b', 0.015);
-        this.freqMap.put('c', 0.028);
-        this.freqMap.put('d', 0.043);
-        this.freqMap.put('e', 0.13);
-        this.freqMap.put('f', 0.022);
-        this.freqMap.put('g', 0.02);
-        this.freqMap.put('h', 0.061);
-        this.freqMap.put('i', 0.07);
-        this.freqMap.put('j', 0.015);
-        this.freqMap.put('k', 0.077);
-        this.freqMap.put('l', 0.04);
-        this.freqMap.put('m', 0.024);
-        this.freqMap.put('n', 0.067);
-        this.freqMap.put('o', 0.075);
-        this.freqMap.put('p', 0.019);
-        this.freqMap.put('q', 0.00095);
-        this.freqMap.put('r', 0.06);
-        this.freqMap.put('s', 0.063);
-        this.freqMap.put('t', 0.091);
-        this.freqMap.put('u', 0.028);
-        this.freqMap.put('v', 0.0098);
-        this.freqMap.put('w', 0.024);
-        this.freqMap.put('x', 0.0015);
-        this.freqMap.put('y', 0.02);
-        this.freqMap.put('z', 0.00074);
+        this.freqMap.put('a', 0.0748);
+        this.freqMap.put('b', 0.0134);
+        this.freqMap.put('c', 0.0411);
+        this.freqMap.put('d', 0.0308);
+        this.freqMap.put('e', 0.1282);
+        this.freqMap.put('f', 0.024);
+        this.freqMap.put('g', 0.0185);
+        this.freqMap.put('h', 0.0414);
+        this.freqMap.put('i', 0.0725);
+        this.freqMap.put('j', 0.0014);
+        this.freqMap.put('k', 0.0053);
+        this.freqMap.put('l', 0.0403);
+        this.freqMap.put('m', 0.0340);
+        this.freqMap.put('n', 0.0673);
+        this.freqMap.put('o', 0.0785);
+        this.freqMap.put('p', 0.0314);
+        this.freqMap.put('q', 0.0010);
+        this.freqMap.put('r', 0.0609);
+        this.freqMap.put('s', 0.0614);
+        this.freqMap.put('t', 0.1002);
+        this.freqMap.put('u', 0.0316);
+        this.freqMap.put('v', 0.0108);
+        this.freqMap.put('w', 0.0131);
+        this.freqMap.put('x', 0.0044);
+        this.freqMap.put('y', 0.0127);
+        this.freqMap.put('z', 0.0011);
     }
 
     public double countChars(String text, char check)
     {
-        return text.length() - text.replace("check","").length();
+        return text.replaceAll(" ","").length() - text.replace(check, ' ').replaceAll(" ","").length();
     }
 
     @Override
-    public boolean execute() throws IOException
+    public boolean action()
     {
-        String doc = Jsoup.connect(this.url).get().body().text();
-        Map<Character, Double> docFreqMap = new HashMap<>();
-        double docCharLength = 0;
-
-        for(char i : this.freqMap.keySet())
+        try
         {
-            double temp = countChars(doc, i);
-            docFreqMap.put(i, temp);
-            docCharLength += temp;
+            String doc = Jsoup.connect(this.url).get().body().text().toLowerCase(Locale.ROOT);
+            doc = doc.replaceAll("[^a-z]","");
+            Map<Character, Double> docFreqMap = new HashMap<>();
+            int docCharLength = doc.length();
+
+            for(char i : this.freqMap.keySet())
+            {
+                docFreqMap.put(i, countChars(doc, i)/docCharLength);
+            }
+
+            double var = 0;
+
+
+            for(char i: this.freqMap.keySet())
+                var += (this.freqMap.get(i) - docFreqMap.get(i))*(this.freqMap.get(i) - docFreqMap.get(i));
+
+            System.out.println(var);
+            return (0.04 >= var);
+        } catch (IOException e)
+        {
+            e.printStackTrace();
         }
-
-        for(char i : docFreqMap.keySet())
-            docFreqMap.put(i,docCharLength/docFreqMap.get(i));
-
-        double var = 0;
-
-        for(char i: this.freqMap.keySet())
-            var += this.freqMap.get(i) - docFreqMap.get(i);
-        return (0.04 >= var*var);
+        return false;
     }
 }

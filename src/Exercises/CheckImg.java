@@ -14,14 +14,21 @@ public class CheckImg extends  BaseCommand
     }
 
     @Override
-    public boolean execute() throws IOException
+    public boolean action()
     {
-        Document doc = Jsoup.connect(this.url).get();
-        Elements imageElements = doc.select("img");
+        try
+        {
+            Document doc = Jsoup.connect(this.url).get();
 
-        if(imageElements.size() < 1)
-            return false;
-        return true;
+            Elements imageElements = doc.select("img");
 
+            if(imageElements.size() < 1)
+                return false;
+            return true;
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
