@@ -58,29 +58,33 @@ public class CheckLang extends BaseCommand
     @Override
     public boolean action()
     {
-        try
+        if(this.args.get(0) == "english")
         {
-            String doc = Jsoup.connect(this.url).get().body().text().toLowerCase(Locale.ROOT);
-            doc = doc.replaceAll("[^a-z]","");
-            Map<Character, Double> docFreqMap = new HashMap<>();
-            int docCharLength = doc.length();
-
-            for(char i : this.freqMap.keySet())
+            try
             {
-                docFreqMap.put(i, countChars(doc, i)/docCharLength);
+                String doc = Jsoup.connect(this.url).get().body().text().toLowerCase(Locale.ROOT);
+                doc = doc.replaceAll("[^a-z]", "");
+                Map<Character, Double> docFreqMap = new HashMap<>();
+                int docCharLength = doc.length();
+
+                for (char i : this.freqMap.keySet())
+                {
+                    docFreqMap.put(i, countChars(doc, i) / docCharLength);
+                }
+
+                double var = 0;
+
+
+                for (char i : this.freqMap.keySet())
+                    var += (this.freqMap.get(i) - docFreqMap.get(i)) * (this.freqMap.get(i) - docFreqMap.get(i));
+
+                System.out.println(var);
+                return (0.04 >= var);
             }
-
-            double var = 0;
-
-
-            for(char i: this.freqMap.keySet())
-                var += (this.freqMap.get(i) - docFreqMap.get(i))*(this.freqMap.get(i) - docFreqMap.get(i));
-
-            System.out.println(var);
-            return (0.04 >= var);
-        } catch (IOException e)
-        {
-            e.printStackTrace();
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
         }
         return false;
     }

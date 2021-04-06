@@ -6,10 +6,7 @@ import org.jsoup.nodes.Document;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class WordSearch extends BaseCommand
 {
@@ -26,26 +23,32 @@ public class WordSearch extends BaseCommand
     @Override
     public boolean action()
     {
-        try
+        if(new ContentType(new String[]{"t", this.url, "text"}).action())
         {
-            Document doc = Jsoup.connect(this.url).get();
-            File wordFile = new File(this.args.get(2));
-            Scanner input = new Scanner(wordFile);
-            while(input.hasNext())
+            try
             {
-                String word = input.next();
-                if(!doc.body().text().contains(word))
-                    return false;
+                Document doc = Jsoup.connect(this.url).get();
+                String urlDoc = doc.body().text().toLowerCase(Locale.ROOT);
+                File wordFile = new File(this.args.get(2));
+                Scanner input = new Scanner(wordFile);
+                while (input.hasNext())
+                {
+                    String word = input.next().toLowerCase(Locale.ROOT);
+                    if (!urlDoc.contains(word))
+                        return false;
+                }
+            }
+            catch (FileNotFoundException e)
+            {
+                e.printStackTrace();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
             }
         }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+        else
+            return false;
 
         return true;
     }

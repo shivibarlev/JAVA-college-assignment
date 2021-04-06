@@ -22,15 +22,19 @@ public class ContentType extends BaseCommand
     @Override
     public boolean action()
     {
-        try
+        if(!(this.args == null))
         {
-            Connection.Response response = Jsoup.connect(this.url).ignoreContentType(true).execute();
-            System.out.println(response.contentType());
-            return response.contentType().contains(this.args.get(0));
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
+            try
+            {
+                Connection.Response response = Jsoup.connect(this.url).ignoreContentType(true).execute();
+                System.out.println(response.contentType());
+                return response.contentType().contains(this.args.get(0));
+            }
+            catch (IOException e)
+            {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
         }
         return false;
     }
