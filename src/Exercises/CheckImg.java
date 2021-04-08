@@ -25,10 +25,11 @@ public class CheckImg extends  BaseCommand
             if(imageElements.size() < 1)
                 return false;
             return true;
-        } catch (IOException e)
-        {
-            e.printStackTrace();
         }
-        return false;
+        catch (Exception e)
+        {
+            System.out.println("error");
+            return false;
+        }
     }
 }

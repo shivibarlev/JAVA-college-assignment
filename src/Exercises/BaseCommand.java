@@ -13,7 +13,6 @@ public abstract class BaseCommand implements Command
     {
         command = arguments[0];
         url = arguments[1];
-
     }
     @Override
     public abstract boolean action();

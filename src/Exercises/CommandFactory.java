@@ -6,7 +6,6 @@ public class CommandFactory
 {
     public Command getCommand(String [] arguments)
     {
-
         try
         {
             switch (arguments[0])
@@ -21,10 +20,12 @@ public class CommandFactory
                     return new CheckLang(arguments);
 
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("invalid command");
         return null;
     }
 }

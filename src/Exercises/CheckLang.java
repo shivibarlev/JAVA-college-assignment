@@ -21,7 +21,22 @@ public class CheckLang extends BaseCommand
 
         for(int i = 2; i < arguments.length; i++)
             args.add(arguments[i]);
+        setFreqTable(args.get(0));
+    }
 
+
+    public void setFreqTable(String lang)
+    {
+        switch (lang)
+        {
+            case "english":
+                setEnglish();
+        }
+
+    }
+
+    public void setEnglish()
+    {
         this.freqMap.put('a', 0.0748);
         this.freqMap.put('b', 0.0134);
         this.freqMap.put('c', 0.0411);
@@ -49,7 +64,6 @@ public class CheckLang extends BaseCommand
         this.freqMap.put('y', 0.0127);
         this.freqMap.put('z', 0.0011);
     }
-
     public double countChars(String text, char check)
     {
         return text.replaceAll(" ","").length() - text.replace(check, ' ').replaceAll(" ","").length();
@@ -58,7 +72,7 @@ public class CheckLang extends BaseCommand
     @Override
     public boolean action()
     {
-        if(this.args.get(0) == "english")
+        if(this.args.get(0).compareTo("english") == 0)
         {
             try
             {
@@ -78,12 +92,12 @@ public class CheckLang extends BaseCommand
                 for (char i : this.freqMap.keySet())
                     var += (this.freqMap.get(i) - docFreqMap.get(i)) * (this.freqMap.get(i) - docFreqMap.get(i));
 
-                System.out.println(var);
                 return (0.04 >= var);
             }
-            catch (IOException e)
+            catch (Exception e)
             {
-                e.printStackTrace();
+                System.out.println("error");
+                return false;
             }
         }
         return false;

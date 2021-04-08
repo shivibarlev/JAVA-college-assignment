@@ -29,7 +29,7 @@ public class WordSearch extends BaseCommand
             {
                 Document doc = Jsoup.connect(this.url).get();
                 String urlDoc = doc.body().text().toLowerCase(Locale.ROOT);
-                File wordFile = new File(this.args.get(2));
+                File wordFile = new File(this.args.get(0));
                 Scanner input = new Scanner(wordFile);
                 while (input.hasNext())
                 {
@@ -38,13 +38,10 @@ public class WordSearch extends BaseCommand
                         return false;
                 }
             }
-            catch (FileNotFoundException e)
+            catch (Exception e)
             {
-                e.printStackTrace();
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
+                System.out.println("error");
+                return false;
             }
         }
         else
