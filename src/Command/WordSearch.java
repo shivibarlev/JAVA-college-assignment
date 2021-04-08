@@ -1,11 +1,9 @@
-package Exercises;
+package Command;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.*;
 
 public class WordSearch extends BaseCommand

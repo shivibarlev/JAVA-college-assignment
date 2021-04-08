@@ -1,10 +1,8 @@
-package Exercises;
+package Command;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class ContentType extends BaseCommand

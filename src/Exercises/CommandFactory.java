@@ -1,6 +1,6 @@
 package Exercises;
 
-import java.util.ArrayList;
+import Command.*;
 
 public class CommandFactory
 {

@@ -1,9 +1,9 @@
 package Exercises;
 
+import Command.Command;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import javax.print.Doc;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
