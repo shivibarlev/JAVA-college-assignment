@@ -9,12 +9,24 @@ import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.util.Scanner;
 
+
+/**
+ * A class responsible for running the program.
+ */
 public class Prog
 {
+    /**
+     * @param reader holds the stream we get data from the user through.
+     */
     String[] arguments;
     static Scanner reader = new Scanner(System.in);
     boolean finish = false;
     Command command;
+
+
+    /**
+     *
+     */
     public void run()
     {
         this.finish = false;
