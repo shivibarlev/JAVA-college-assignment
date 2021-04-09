@@ -6,11 +6,17 @@ import org.jsoup.nodes.Document;
 import java.io.File;
 import java.util.*;
 
+/**
+ * A command type class, this command searches the web page from the URL for words that are in the file provided by the user.
+ */
 public class WordSearch extends BaseCommand
 {
     ArrayList<String> args = new ArrayList<>();
 
-
+    /**
+     * Class constructor, builds the object from arguments given by the user.
+     * @param arguments holds the URL, and the path to the file containing the words to search.
+     */
     public WordSearch(String[] arguments)
     {
         super(arguments);
@@ -18,6 +24,11 @@ public class WordSearch extends BaseCommand
             this.args.add(arguments[i]);
     }
 
+    /**
+     * A method that runs this commands test, checking if the content type of the URL is "text",
+     * and searches the page for the words provided by the user.
+     * @return true if web page contains ALL words, false if not.
+     */
     @Override
     public boolean action()
     {

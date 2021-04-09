@@ -6,11 +6,18 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * A command type class, this command checks if the language of the web page provided by the user is in a specific language.
+ */
 public class CheckLang extends BaseCommand
 {
     ArrayList<String> args = new ArrayList<>();
     Map<Character, Double> freqMap = new HashMap<>();
 
+    /**
+     * Class constructor, builds the object from arguments given by the user and sets the correct frequency table.
+     * @param arguments holds the URL and the language the user wants to check.
+     */
     public CheckLang(String[] arguments)
     {
         super(arguments);
@@ -20,7 +27,10 @@ public class CheckLang extends BaseCommand
         setFreqTable(args.get(0));
     }
 
-
+    /**
+     * A function that sets the correct frequency table to compare with the web page frequency table.
+     * @param lang holds the language to be checked.
+     */
     public void setFreqTable(String lang)
     {
         switch (lang)
@@ -31,6 +41,9 @@ public class CheckLang extends BaseCommand
 
     }
 
+    /**
+     * A function that sets the frequency table for the english language.
+     */
     public void setEnglish()
     {
         this.freqMap.put('a', 0.0748);
@@ -60,11 +73,23 @@ public class CheckLang extends BaseCommand
         this.freqMap.put('y', 0.0127);
         this.freqMap.put('z', 0.0011);
     }
+
+    /**
+     * A function that counts the number of occurrences of a character in a string.
+     * @param text holds the string to check.
+     * @param check holds the character to count.
+     * @return number of occurrences of 'check' in 'text'.
+     */
     public double countChars(String text, char check)
     {
         return text.replaceAll(" ","").length() - text.replace(check, ' ').replaceAll(" ","").length();
     }
 
+    /**
+     * A method that runs this commands test, checking if the web page is in the language specified.
+     * By creating a frequency table of the web page's text and matching it to existing frequency tables of different languages.
+     * @return true if web page is in the specified language and false if not.
+     */
     @Override
     public boolean action()
     {
