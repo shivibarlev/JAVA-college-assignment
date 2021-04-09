@@ -25,7 +25,9 @@ public class Prog
 
 
     /**
-     *
+     * This function runs the actual program, starts a loop to get commands from the user and stops after user enters 'q'.
+     * @param
+     * @return
      */
     public void run()
     {
@@ -52,6 +54,12 @@ public class Prog
         this.finish = true;
     }
 
+
+    /**
+     * This function is responsible of checking the url provided by the user, making sure it exists and doesnt time out.
+     * @param url holds te URL provided by the user.
+     * @return true if the URL is good, false if the URL is bad.
+     */
     public boolean checkURL(String url)
     {
         try
@@ -82,7 +90,11 @@ public class Prog
         return true;
     }
 
-
+    /**
+     * This function returns true if the program should be done running and false if not.
+     * (used to check if Main should restart the program in case of some error that caused it to stop)
+     * @return true if program is done running, false if not.
+     */
     public boolean isDone()
     {
         return this.finish;
