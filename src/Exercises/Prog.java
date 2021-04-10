@@ -26,8 +26,6 @@ public class Prog
 
     /**
      * This function runs the actual program, starts a loop to get commands from the user and stops after user enters 'q'.
-     * @param
-     * @return
      */
     public void run()
     {
